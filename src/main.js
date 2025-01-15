@@ -1,3 +1,4 @@
+"use strict";
 import { auto } from "openai/_shims/registry.mjs";
 import "../styles/style.css";
 
@@ -46,7 +47,7 @@ const swiper1 = new Swiper(".swiper-section-2", {
 
 const swiper2 = new Swiper(".swiper-section-5", {
   spaceBetween: 30,
-  slidesPerView: "auto",
+  slidesPerView: 4,
   loop: true,
   speed: 4000,
   freeMode: true,
@@ -54,21 +55,152 @@ const swiper2 = new Swiper(".swiper-section-5", {
   autoplay: {
     delay: 0,
   },
+  // Breakpoints
+  breakpoints: {
+    // when window width is >= 425px
+    425: {
+      slidesPerView: 1,
+      spaceBetween: 15,
+    },
+    // when window width is >= 768px
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    // when window width is >= 1024px
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
+  },
 });
 
 // weather forecast section
+// const apikey = "6e856ad753f04e079d0100743251501";
+// const city = "Villard-de-Lans";
+// const days = 5;
 
-// const apiKey = "1f2fab42372f52cebce995fe8e6b573c";
-const apikey = "60af3ad36678c9dad7916b75b5631202";
+// async function checkWeather(apiKey, city) {
+//   try {
+//     const response = await fetch(
+//       `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}`
+//     );
+//     if (!response.ok) {
+//       throw new Error("Https error:", response.status);
+//     }
+//   }
+//   const data = await response.json();
+//   console.log(data);
+//   return data;
+// }
+// catch (error) {
+//   console.error("Error fetching weather data:", error);
+//     return null;
+// }
 
-// const apiUrl ='https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}'
+// function getWeekday(dateString) {
+//   const date = new Date(dateString);
+//   const options = { weekday: "long" };
+//   return date.toLocaleString("en-US", options);
+// }
 
-async function checkWeather(apiKey, city = "Villard-de-Lans") {
-  const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}units=metric`
-  );
-  const data = await response.json();
-  console.log(data);
+// function addWeatherData(data) {
+//   if (!data || !data.forecast) {
+//     console.log("Structural error", data);
+//     return;
+//   }
+//   const forecastdays = data.forecast.forecastday;
+//   console.log(forecastdays);
+//   let forecasthtml;
+//   forecastdays.forEach((day) => {
+//     const {
+//       date,
+//       day: { avgtemp_c, condition },
+//     } = day;
+
+//     // const presDate = new Date().toLocaleDateString("en-US",{day:"2-digit"});
+//     const weekday = getWeekday(date);
+//     forecasthtml += `
+//    <div class="forecast_item">
+//             <h3 class="forecast_item-title">${weekday}</h3>
+//             <img
+//               src="${condition.icon}"
+//               alt="weather image"
+//               class="weather_image"
+//             />
+//             <h3 class="forecast_item-temp">${avgtemp_c} </h3>
+//   `;
+//   });
+//   document.querySelector(".forecast").innerHTML = forecasthtml;
+// }
+// addWeatherData(checkWeather);
+
+// checkWeather(apikey, city, days)
+//   .then((data) => addWeatherData(data))
+//   .catch((error) => console.log("error fetching weather data", error));
+
+const apikey = "6e856ad753f04e079d0100743251501";
+const city = "Villard-de-Lans";
+const days = 5;
+
+async function fetchWeatherData(apiKey, city) {
+  try {
+    const response = await fetch(
+      `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+    return null; // Return null on error
+  }
 }
 
-checkWeather(apikey);
+function getWeekday(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleString("en-US", { weekday: "long" });
+}
+
+function addWeatherData(data) {
+  if (!data || !data.forecast) {
+    console.error("Invalid data structure:", data);
+    return;
+  }
+
+  const forecastdays = data.forecast.forecastday;
+  let forecasthtml = ""; // Initialize as an empty string
+
+  forecastdays.forEach((day) => {
+    const {
+      date,
+      day: { avgtemp_c, condition },
+    } = day;
+
+    const weekday = getWeekday(date);
+    const iconUrl = condition ? condition.icon : ""; // Check if condition exists
+
+    forecasthtml += `
+      <div class="forecast_item">
+        <h3 class="forecast_item-title">${weekday}</h3>
+        <img src="${iconUrl}" alt="weather image" class="weather_image" />
+        <h3 class="forecast_item-temp">${avgtemp_c} °C</h3>
+      </div>
+    `;
+  });
+
+  document.querySelector(".forecast").innerHTML = forecasthtml;
+}
+
+// Fetch and display weather data
+fetchWeatherData(apikey, city)
+  .then((data) => {
+    if (data) {
+      addWeatherData(data);
+    }
+  })
+  .catch((error) => console.error("Error in promise chain:", error));

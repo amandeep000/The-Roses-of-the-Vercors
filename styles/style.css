@@ -100,7 +100,7 @@ main {
   font-size: var(--size--base);
   text-transform: uppercase;
   font-weight: 400;
-  font-family: ivypresto;
+  font-family: "Archivo", serif;
 }
 .nav__logo {
   width: 33.33%;
@@ -477,6 +477,7 @@ main {
 .weather-forecast_heading {
   font-size: var(--size--5xl);
   color: #395353;
+  margin-bottom: 1rem;
 }
 .forecast {
   display: flex;
@@ -585,9 +586,6 @@ main {
   color: var(--text-clr);
   padding: 10px 0;
   font-size: 1rem;
-}
-.footer-section {
-  background-color: #132430;
   color: #fff;
   text-align: center;
   font-family: Arial, sans-serif;
@@ -737,9 +735,7 @@ main {
   .hero-section h2 {
     font-size: var(--size--2xl);
   }
-  .find-us__content {
-    flex-wrap: wrap;
-  }
+
   .find-us__map {
     width: 100%;
   }
@@ -799,5 +795,34 @@ main {
     color: #132430;
     margin-bottom: 2rem;
     font-family: "Archivo", serif;
+  }
+  .weather-forecast_heading {
+    font-size: 2rem !important;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .section-7 {
+    flex-direction: column;
+  }
+  .address {
+    width: 100%;
+  }
+  .mail {
+    width: 100%;
+  }
+  .phone {
+    width: 100%;
+  }
+  .footer-section {
+    flex-direction: column;
+  }
+  .copyright {
+    width: 100%;
+  }
+  .find-us__content {
+    flex-wrap: wrap;
+  }
+  .find-us .find-us__details {
+    max-width: 100%;
   }
 }
