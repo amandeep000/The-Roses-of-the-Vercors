@@ -45,33 +45,21 @@ const swiper1 = new Swiper(".swiper-section-2", {
   },
 });
 
-const swiper2 = new Swiper(".swiper-section-5", {
-  spaceBetween: 30,
-  slidesPerView: 4,
-  loop: true,
-  speed: 4000,
-  freeMode: true,
-  allowTouchMove: false,
+const swiper = new Swiper(".swiper-section-5", {
+  loop: true, // Enable continuous loop mode
   autoplay: {
-    delay: 0,
+    delay: 3000, // Delay between slides in milliseconds
+    disableOnInteraction: false, // Continue autoplay after user interaction
   },
-  // Breakpoints
-  breakpoints: {
-    // when window width is >= 425px
-    425: {
-      slidesPerView: 1,
-      spaceBetween: 15,
-    },
-    // when window width is >= 768px
-    768: {
-      slidesPerView: 2,
-      spaceBetween: 20,
-    },
-    // when window width is >= 1024px
-    1024: {
-      slidesPerView: 3,
-      spaceBetween: 30,
-    },
+  slidesPerView: 1, // Number of slides to show at once
+  spaceBetween: 10, // Space between slides
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
   },
 });
 

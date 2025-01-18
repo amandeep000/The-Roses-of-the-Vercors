@@ -438,23 +438,25 @@ main {
   height: 100%;
 }
 .find-us__gallery {
-  margin-top: 3rem;
-}
-
-.find-us__gallery {
+  width: 100%;
   overflow: hidden;
 }
-.find-us__gallery .swiper-slide__img {
-  border-radius: 15px;
-  object-fit: cover;
+
+.swiper-section-5 {
   width: 100%;
-  height: 100%;
+  height: 300px; /* Adjust height as needed */
 }
-.slide-item {
-  max-width: 33.33%;
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.find-us_gallery-wrapper {
-  transition-timing-function: linear;
+
+.swiper-slide__img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 /* Weather forecast section */
@@ -683,6 +685,9 @@ main {
   .services-item h3 {
     font-size: 40px;
   }
+  .swiper-section-5 {
+    height: 250px; /* Adjust height for 1024px */
+  }
 }
 @media (max-width: 768px) {
   .hero-section h1 {
@@ -724,6 +729,9 @@ main {
   }
   .services-item h3 {
     font-size: 36px;
+  }
+  .swiper-section-5 {
+    height: 200px; /* Adjust height for 768px */
   }
 }
 
@@ -824,5 +832,21 @@ main {
   }
   .find-us .find-us__details {
     max-width: 100%;
+  }
+
+  .address {
+    order: 0;
+  }
+  .mail {
+    order: 1;
+  }
+  .phone {
+    order: 2;
+  }
+  .terms {
+    margin: 0 20px;
+  }
+  .swiper-section-5 {
+    height: 150px; /* Adjust height for 425px */
   }
 }
