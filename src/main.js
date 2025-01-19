@@ -46,20 +46,35 @@ const swiper1 = new Swiper(".swiper-section-2", {
 });
 
 const swiper = new Swiper(".swiper-section-5", {
-  loop: true, // Enable continuous loop mode
+  loop: true,
+  cssMode: true,
+  speed: 8000,
   autoplay: {
-    delay: 3000, // Delay between slides in milliseconds
-    disableOnInteraction: false, // Continue autoplay after user interaction
+    delay: 3000,
+    disableOnInteraction: false,
   },
-  slidesPerView: 1, // Number of slides to show at once
-  spaceBetween: 10, // Space between slides
+  slidesPerView: 4,
+  spaceBetween: 30,
   pagination: {
     el: ".swiper-pagination",
     clickable: true,
   },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
+  breakpoints: {
+    // when window width is >= 425px
+    425: {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    },
+    // when window width is >= 768px
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    // when window width is >= 1024px
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
   },
 });
 
