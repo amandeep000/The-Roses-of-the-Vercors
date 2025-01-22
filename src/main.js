@@ -31,7 +31,7 @@ document.addEventListener("click", function (e) {
   }
 });
 
-// swiper js
+// swiper js for Accommodation section
 const swiper1 = new Swiper(".swiper-section-2", {
   effect: "fade",
   slidesPerView: "auto",
@@ -45,6 +45,7 @@ const swiper1 = new Swiper(".swiper-section-2", {
   },
 });
 
+// gallery section
 const swiper = new Swiper(".swiper-section-5", {
   loop: true,
   cssMode: true,
@@ -78,132 +79,48 @@ const swiper = new Swiper(".swiper-section-5", {
   },
 });
 
-// weather forecast section
-// const apikey = "6e856ad753f04e079d0100743251501";
-// const city = "Villard-de-Lans";
-// const days = 5;
-
-// async function checkWeather(apiKey, city) {
-//   try {
-//     const response = await fetch(
-//       `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}`
-//     );
-//     if (!response.ok) {
-//       throw new Error("Https error:", response.status);
-//     }
-//   }
-//   const data = await response.json();
-//   console.log(data);
-//   return data;
-// }
-// catch (error) {
-//   console.error("Error fetching weather data:", error);
-//     return null;
-// }
-
-// function getWeekday(dateString) {
-//   const date = new Date(dateString);
-//   const options = { weekday: "long" };
-//   return date.toLocaleString("en-US", options);
-// }
-
-// function addWeatherData(data) {
-//   if (!data || !data.forecast) {
-//     console.log("Structural error", data);
-//     return;
-//   }
-//   const forecastdays = data.forecast.forecastday;
-//   console.log(forecastdays);
-//   let forecasthtml;
-//   forecastdays.forEach((day) => {
-//     const {
-//       date,
-//       day: { avgtemp_c, condition },
-//     } = day;
-
-//     // const presDate = new Date().toLocaleDateString("en-US",{day:"2-digit"});
-//     const weekday = getWeekday(date);
-//     forecasthtml += `
-//    <div class="forecast_item">
-//             <h3 class="forecast_item-title">${weekday}</h3>
-//             <img
-//               src="${condition.icon}"
-//               alt="weather image"
-//               class="weather_image"
-//             />
-//             <h3 class="forecast_item-temp">${avgtemp_c} </h3>
-//   `;
-//   });
-//   document.querySelector(".forecast").innerHTML = forecasthtml;
-// }
-// addWeatherData(checkWeather);
-
-// checkWeather(apikey, city, days)
-//   .then((data) => addWeatherData(data))
-//   .catch((error) => console.log("error fetching weather data", error));
-
+// Weather section
 const apikey = "6e856ad753f04e079d0100743251501";
 const city = "Villard-de-Lans";
 const days = 5;
 
-async function fetchWeatherData(apiKey, city) {
+async function getWeatherData(apikey, city) {
   try {
     const response = await fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}`
+      `https://api.weatherapi.com/v1/forecast.json?key=${apikey}&q=${city}&days=${days}`
     );
-
     if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
+      throw new Error(`HTTP Error: ${response.status}`);
     }
-
     const data = await response.json();
-    return data;
+    addWeatherData(data);
   } catch (error) {
-    console.error("Error fetching weather data:", error);
-    return null; // Return null on error
+    console.error(`Error fetching weather data`, error);
   }
 }
 
-function getWeekday(dateString) {
+getWeatherData(apikey, city);
+
+function getWeekdays(dateString) {
   const date = new Date(dateString);
   return date.toLocaleString("en-US", { weekday: "long" });
 }
 
 function addWeatherData(data) {
-  if (!data || !data.forecast) {
-    console.error("Invalid data structure:", data);
-    return;
-  }
-
   const forecastdays = data.forecast.forecastday;
-  let forecasthtml = ""; // Initialize as an empty string
-
-  forecastdays.forEach((day) => {
+  console.log(forecastdays);
+  let foreCastHTML = "";
+  forecastdays.forEach((days, i) => {
     const {
       date,
-      day: { avgtemp_c, condition },
-    } = day;
-
-    const weekday = getWeekday(date);
-    const iconUrl = condition ? condition.icon : ""; // Check if condition exists
-
-    forecasthtml += `
-      <div class="forecast_item">
-        <h3 class="forecast_item-title">${weekday}</h3>
-        <img src="${iconUrl}" alt="weather image" class="weather_image" />
-        <h3 class="forecast_item-temp">${avgtemp_c} °C</h3>
-      </div>
-    `;
+      day: { condition, avgtemp_c },
+    } = days;
+    const weekday = getWeekdays(date);
+    foreCastHTML += `<div class="forecast_item" ${i}>
+         <h3 class="forecast_item-title">${weekday}</h3>
+         <img src="${condition.icon}" alt="weather image" class="weather_image" />
+         <h3 class="forecast_item-temp">${avgtemp_c} °C</h3>
+     </div>`;
   });
-
-  document.querySelector(".forecast").innerHTML = forecasthtml;
+  document.querySelector(".forecast").innerHTML = foreCastHTML;
 }
-
-// Fetch and display weather data
-fetchWeatherData(apikey, city)
-  .then((data) => {
-    if (data) {
-      addWeatherData(data);
-    }
-  })
-  .catch((error) => console.error("Error in promise chain:", error));
