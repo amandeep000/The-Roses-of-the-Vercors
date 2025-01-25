@@ -53,6 +53,7 @@ p {
 }
 h1 {
   font-family: "ivyprestoLight";
+  color: var(--icons-clr);
 }
 @font-face {
   font-family: "ivyprestoLight";
@@ -66,7 +67,7 @@ main {
   overflow: hidden;
 }
 .section-1 {
-  background-image: url(../public/banner.jpg);
+  background-image: url(../public/vu-anh-ThyBKNya1yY-unsplash.jpg);
   background-position: center;
   background-size: cover;
   border-radius: var(--size--xs);
@@ -638,6 +639,86 @@ main {
   font-size: 3rem;
 }
 
+/* modal window starts*/
+dialog {
+  margin: auto;
+  padding: 2rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 6px;
+  height: 54%;
+  width: 45%;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.3s ease allow-discrete;
+  z-index: 1000000;
+}
+
+#dialog-close-btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+}
+.discountCode span {
+  color: maroon;
+}
+
+.dialog-h2 {
+  font-family: "ivyprestoLight", serif;
+  font-size: 32px;
+  max-width: 70%;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 38px;
+  color: var(--icons-clr);
+}
+dialog[open] {
+  opacity: 1;
+}
+
+dialog p {
+  font-size: 18px;
+  color: var(--secondary-text-clr);
+  font-weight: 400;
+  text-align: center;
+  max-width: 45ch;
+}
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+  }
+}
+
+dialog::backdrop {
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s;
+}
+
+dialog[open]::backdrop {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+@starting-style {
+  dialog[open]::backdrop {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+.find-us__btn {
+  padding: 12px 25px;
+  margin-top: 1rem;
+  background: #fff;
+  color: var(--icons-clr);
+  box-shadow: unset;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+/* modal window ends */
 @media (max-width: 1024px) {
   .nav__links {
     display: flex;

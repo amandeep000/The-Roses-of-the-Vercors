@@ -124,3 +124,19 @@ function addWeatherData(data) {
   });
   document.querySelector(".forecast").innerHTML = foreCastHTML;
 }
+
+// html Modal window
+const dialog = document.getElementById("dialog");
+const closeButton = document.getElementById("dialog-close-btn");
+
+// function to open dialog
+function openDialog() {
+  dialog.setAttribute("open", "true");
+}
+
+// funtion to close dialog window
+function closeDialog() {
+  dialog.removeAttribute("open");
+}
+closeButton.addEventListener("click", closeDialog);
+setTimeout(openDialog, 6000);
