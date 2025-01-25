@@ -648,7 +648,7 @@ dialog {
   transform: translate(-50%, -50%);
   border: none;
   border-radius: 6px;
-  height: 54%;
+  height: 60%;
   width: 45%;
   opacity: 0;
   display: flex;
@@ -666,8 +666,9 @@ dialog {
   top: 15px;
   cursor: pointer;
 }
-.discountCode span {
-  color: maroon;
+.discountCode-para span {
+  color: rgb(84, 2, 2);
+  cursor: pointer;
 }
 
 .dialog-h2 {
@@ -825,7 +826,7 @@ dialog[open]::backdrop {
 @media (max-width: 450px) {
   .hero-section h1 {
     text-align: center;
-    font-size: var(--size--4xl);
+    font-size: var(--size--3xl);
   }
   .hero-section h2 {
     font-size: var(--size--2xl);
@@ -935,5 +936,15 @@ dialog[open]::backdrop {
   }
   .swiper-section-5 {
     height: 150px; /* Adjust height for 425px */
+  }
+  .accommodation {
+    padding: 10px;
+  }
+  p.services-description {
+    padding: 10px;
+  }
+  #dialog {
+    height: 80%;
+    width: 80%;
   }
 }

@@ -140,3 +140,12 @@ function closeDialog() {
 }
 closeButton.addEventListener("click", closeDialog);
 setTimeout(openDialog, 6000);
+
+// function to copy the discound code from modal window automatically when clicked
+
+document.getElementById("discount-code").addEventListener("click", function () {
+  navigator.clipboard
+    .writeText(this.innerText)
+    .then(() => `Discount copied to clipboard: ` + this.innerText)
+    .catch((err) => console.error("failed to copy: ", err));
+});
