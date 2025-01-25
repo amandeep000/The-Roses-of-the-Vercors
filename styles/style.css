@@ -947,4 +947,7 @@ dialog[open]::backdrop {
     height: 80%;
     width: 80%;
   }
+  .slide-item {
+    width: 100% !important;
+  }
 }
