@@ -822,7 +822,7 @@ dialog[open]::backdrop {
   }
 }
 
-@media (max-width: 426px) {
+@media (max-width: 450px) {
   .hero-section h1 {
     text-align: center;
     font-size: var(--size--4xl);
