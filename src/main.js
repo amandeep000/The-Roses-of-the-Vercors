@@ -49,7 +49,7 @@ const swiper1 = new Swiper(".swiper-section-2", {
 const swiper = new Swiper(".swiper-section-5", {
   loop: true,
   cssMode: true,
-  speed: 8000,
+  speed: 6000,
   autoplay: {
     delay: 3000,
     disableOnInteraction: false,

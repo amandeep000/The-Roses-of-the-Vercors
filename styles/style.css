@@ -651,6 +651,7 @@ dialog {
   height: 60%;
   width: 45%;
   opacity: 0;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
